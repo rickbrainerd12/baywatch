@@ -18,7 +18,7 @@ A catalog of Michael Bay's extensive filmography
 ### Super Mega Bonus Credit
 
 * Make sure that both of those buttons affect the array as well, not just the DOM
-* Make the _fav_ button toggle the _fav_ status on or off
+* Make thse _fav_ button toggle the _fav_ status on or off
 
 ### Super Mega Bonus Credit Hyper Fighting
 * Add buttons to move a flick up and down the list
