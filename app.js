@@ -22,7 +22,7 @@ const app = {
     item.textContent = flick.name
 
     favButton.addEventListener('click', function(){item.style.backgroundColor = 'yellow'})
-    removeButton.addEventListener('click', function(){this.parentElement.parentElement.removeChild(this.parentElement)})
+    removeButton.addEventListener('click', function(){this.parentElement.remove(this.parentElement)})
 
 
     favButton.textContent = "Favorite"
