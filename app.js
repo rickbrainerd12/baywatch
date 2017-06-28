@@ -23,6 +23,8 @@ const app = {
 
     favButton.addEventListener('click', function(){item.style.backgroundColor = 'yellow'})
     removeButton.addEventListener('click', function(){this.parentElement.remove(this.parentElement)})
+    upButton.addEventListener('click', function(){if(item.previousElementSibling){ item.parentElement.insertBefore(item, item.previousSibling)}})
+    downButton.addEventListener('click', function(){})
 
 
     favButton.textContent = "Favorite"
@@ -38,8 +40,8 @@ const app = {
     upButton.style.backgroundColor = "Green"
 
     downButton.style.textContent = "Down"
-    downButton.style.color = "Red"
-    downButton.style.color = "Green"
+    downButton.style.color = "white"
+    downButton.style.color = "black"
 
     item.appendChild(favButton)
     item.appendChild(removeButton)
