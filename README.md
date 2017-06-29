@@ -23,3 +23,18 @@ A catalog of Michael Bay's extensive filmography
 ### Super Mega Bonus Credit Hyper Fighting
 * Add buttons to move a flick up and down the list
 * Reorder the array as well
+
+## Day 4 Homework
+* Finish implementing _move up_ and _move down_
+
+### Bonus Credit
+
+* Allow users to edit the names of the existing flicks. Wouldn't it be nice if we could make that `spans` **content editable**?
+
+### Super Mega Bonus Credit
+
+* Persist the data via `localStorage`. When you refresh the page, your flicks should be there
+
+### Super Mega Bonus Credit Hyper Fighting
+
+* Allow users to filter the list of flicks using a search field
