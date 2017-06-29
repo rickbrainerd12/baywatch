@@ -1,4 +1,5 @@
-#flick-list{
-    border-color: black
+@import url('https://fonts.googleapis.com/css?family=Audiowide');
 
+.li{
+    font-family: 'Audiowide', cursive;
 }

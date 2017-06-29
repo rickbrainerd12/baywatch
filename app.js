@@ -21,6 +21,8 @@ const app = {
     const downButton = document.createElement('button')
     item.textContent = flick.name
 
+    item.dataset.id = flick.id
+
     favButton.addEventListener('click', function(){item.style.backgroundColor = 'yellow'})
     removeButton.addEventListener('click', function(){this.parentElement.remove(this.parentElement)})
     upButton.addEventListener('click', function(){if(item.previousElementSibling){item.parentElement.insertBefore(item, item.previousSibling)}})
@@ -61,7 +63,7 @@ const app = {
     this.flicks.push(flick)
 
     const listItem = this.renderListItem(flick)
-    this.list.appendChild(listItem)
+    this.list.insertBefore(listItem, this.list.firstElementChild)
 
     this.max ++
     f.reset()
