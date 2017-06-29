@@ -3,6 +3,7 @@ const app = {
     this.flicks = []
     this.max = 0
     this.list = document.querySelector(selectors.listSelector)
+    this.template = document.querySelector(selectors.templateSelector)
 
     document
       .querySelector(selectors.formSelector)
@@ -12,44 +13,80 @@ const app = {
       )
   },
 
+  favFlick(flick, ev) {
+    const listItem = ev.target.closest('.flick')
+    flick.fav = !flick.fav
+
+    if (flick.fav) {
+      listItem.classList.add('fav')
+    } else {
+      listItem.classList.remove('fav')
+    }
+  },
+
+  removeFlick(flick, ev) {
+    // remove from the DOM
+    const listItem = ev.target.closest('.flick')
+    listItem.remove()
+
+    // remove from the array
+    const i = this.flicks.indexOf(flick)
+    this.flicks.splice(i, 1)
+  },
+
+  moveFlickUp(flick, ev){
+    //Move up in DOM
+    const listItem = ev.target.closest('.flick')
+    if(listItem.previousElementSibling){listItem.parentElement.insertBefore(listItem, listItem.previousSibling)}
+    //move up in array
+    const i = this.flicks.indexOf(flick)
+    i.insertBefore(i.previousSibling)
+  },
+
+  moveFlickDown(flick, ev){
+    //Move down in DOM
+    const listItem = ev.target.closest('.flick')
+    if(listItem.nextElementSibling){listItem.parentElement.insertBefore(listItem, listItem.nextElementSibling.nextElementSibling)}
+    //Move down in array
+    const i = this.flicks.indexOf(flick)
+    i.insertBefore(i.nextElementSibling.nextElementSibling)
+  },
+  
 
   renderListItem(flick) {
-    const item = document.createElement('li')
-    const favButton = document.createElement('button')
-    const removeButton = document.createElement('button')
-    const upButton = document.createElement('button')
-    const downButton = document.createElement('button')
-    item.textContent = flick.name
-
+    const item = this.template.cloneNode(true)
+    item.classList.remove('template')
     item.dataset.id = flick.id
+    item
+      .querySelector('.flick-name')
+      .textContent = flick.name
 
-    favButton.addEventListener('click', function(){item.style.backgroundColor = 'yellow'})
-    removeButton.addEventListener('click', function(){this.parentElement.remove(this.parentElement)})
-    upButton.addEventListener('click', function(){if(item.previousElementSibling){item.parentElement.insertBefore(item, item.previousSibling)}})
-    downButton.addEventListener('click', function(){})
+    item
+      .querySelector('button.remove')
+      .addEventListener(
+        'click', 
+        this.removeFlick.bind(this, flick)
+      )
 
+    item
+      .querySelector('button.fav')
+      .addEventListener(
+        'click', 
+        this.favFlick.bind(this, flick)
+      )
 
-    favButton.textContent = "Favorite"
-    favButton.style.color = "blue"
-    favButton.style.backgroundColor = "yellow"
+    item
+      .querySelector('button.up')
+      .addEventListener(
+        'click', this.moveFlickUp.bind(this, flick)
+      )
 
-    removeButton.textContent = "Remove"
-    removeButton.style.color = "White"
-    removeButton.style.backgroundColor = "Red"
-
-    upButton.textContent = "Up"
-    upButton.style.color = "Red"
-    upButton.style.backgroundColor = "Green"
-
-    downButton.style.textContent = "Down"
-    downButton.style.color = "white"
-    downButton.style.color = "black"
-
-    item.appendChild(favButton)
-    item.appendChild(removeButton)
-    item.appendChild(upButton)
-    item.appendChild(downButton)
-
+    item
+      .querySelector('button.down')
+      .addEventListener(
+        'click', this.moveFlickDown.bind(this, flick)
+      )
+    
     return item
   },
 
@@ -59,11 +96,14 @@ const app = {
     const flick = {
       id: this.max + 1,
       name: f.flickName.value,
+      fav: false,
     }
+
     this.flicks.unshift(flick)
 
     const listItem = this.renderListItem(flick)
-    this.list.insertBefore(listItem, this.list.firstElementChild)
+    this.list
+      .insertBefore(listItem, this.list.firstElementChild)
 
     this.max ++
     f.reset()
@@ -73,4 +113,5 @@ const app = {
 app.init({
   formSelector: 'form#flick-form',
   listSelector: '#flick-list',
+  templateSelector: '.flick.template',
 })
