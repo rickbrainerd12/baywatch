@@ -23,7 +23,7 @@ const app = {
 
     favButton.addEventListener('click', function(){item.style.backgroundColor = 'yellow'})
     removeButton.addEventListener('click', function(){this.parentElement.remove(this.parentElement)})
-    upButton.addEventListener('click', function(){if(item.previousElementSibling){ item.parentElement.insertBefore(item, item.previousSibling)}})
+    upButton.addEventListener('click', function(){if(item.previousElementSibling){item.parentElement.insertBefore(item, item.previousSibling)}})
     downButton.addEventListener('click', function(){})
 
 
@@ -64,6 +64,7 @@ const app = {
     this.list.appendChild(listItem)
 
     this.max ++
+    f.reset()
   },
 }
 
