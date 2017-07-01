@@ -39,17 +39,20 @@ const app = {
     const listItem = ev.target.closest('.flick')
     if(listItem.previousElementSibling){listItem.parentElement.insertBefore(listItem, listItem.previousSibling)}
     //move up in array
-    const i = this.flicks.indexOf(flick)
-    i.insertBefore(i.previousSibling)
-  },
+    const location = this.flicks.indexOf(flick)
+    const tempObject = this.flicks.splice(location, 1, this.flicks[location-1])[0];
+    this.flicks.splice(location-1, 1, tempObject)
+    
+   },
 
   moveFlickDown(flick, ev){
     //Move down in DOM
     const listItem = ev.target.closest('.flick')
     if(listItem.nextElementSibling){listItem.parentElement.insertBefore(listItem, listItem.nextElementSibling.nextElementSibling)}
     //Move down in array
-    const i = this.flicks.indexOf(flick)
-    i.insertBefore(i.nextElementSibling.nextElementSibling)
+    const location = this.flicks.indexOf(flick)
+    const tempObject = this.flicks.splice(location, 1, this.flicks[location+1])[0];
+    this.flicks.splice(location+1, 1, tempObject)
   },
   
 
