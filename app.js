@@ -42,7 +42,6 @@ const app = {
     const location = this.flicks.indexOf(flick)
     const tempObject = this.flicks.splice(location, 1, this.flicks[location-1])[0];
     this.flicks.splice(location-1, 1, tempObject)
-    
    },
 
   moveFlickDown(flick, ev){
@@ -53,6 +52,16 @@ const app = {
     const location = this.flicks.indexOf(flick)
     const tempObject = this.flicks.splice(location, 1, this.flicks[location+1])[0];
     this.flicks.splice(location+1, 1, tempObject)
+  },
+
+  editFlick(flick, ev){
+    const listItem = ev.target.closest('.flick')
+    const namePrompt = prompt('Please enter new name', '')
+    const newName = namePrompt
+    const listItemText = listItem.childNodes[0]
+    listItemText.nodeValue = newName
+    
+    
   },
   
 
@@ -88,6 +97,12 @@ const app = {
       .querySelector('button.down')
       .addEventListener(
         'click', this.moveFlickDown.bind(this, flick)
+      )
+
+    item 
+      .querySelector('button.edit')
+      .addEventListener(
+        'click', this.editFlick.bind(this, flick)
       )
     
     return item
